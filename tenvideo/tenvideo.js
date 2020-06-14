@@ -79,7 +79,6 @@ function signtask() {
     })
   })
 }
-}
 
 function getexp() {
   return new Promise((resolve, reject) => {
