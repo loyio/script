@@ -60,10 +60,53 @@ function signapp() {
   })
 }
 
-function signtask() {
+//下载
+function signtaskdownload() {
   return new Promise((resolve, reject) => {
     const timestamp = Math.round(new Date().getTime() / 1000).toString()
-    const VAL_signurl = `https://vip.video.qq.com/fcgi-bin/comm_cgi?name=hierarchical_task_system&cmd=7&_=${timestamp}`
+    const VAL_signurl = `https://vip.video.qq.com/fcgi-bin/comm_cgi?name=spp_MissionFaHuo&cmd=4&task_id=7&_=${timestamp}`
+    let url = { url: VAL_signurl, headers: {} }
+    url.headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_2) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.4 Safari/605.1.15'
+    chavy.get(url, (error, response, data) => {
+      try {
+        taskinfo.signapp = JSON.parse(data.match(/\((.*)\);/)[1])
+        resolve()
+      } catch (e) {
+        chavy.msg(cookieName, `V力值活动完成结果: 失败`, `说明: ${e}`)
+        chavy.log(`❌ ${cookieName} signapp - V力值活动完成失败: ${e}`)
+        chavy.log(`❌ ${cookieName} signapp - response: ${JSON.stringify(response)}`)
+        resolve()
+      }
+    })
+  })
+}
+
+//弹幕
+function signtaskBarrage() {
+  return new Promise((resolve, reject) => {
+    const timestamp = Math.round(new Date().getTime() / 1000).toString()
+    const VAL_signurl = `https://vip.video.qq.com/fcgi-bin/comm_cgi?name=spp_MissionFaHuo&cmd=4&task_id=7&_=${timestamp}`
+    let url = { url: VAL_signurl, headers: {} }
+    url.headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_2) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.4 Safari/605.1.15'
+    chavy.get(url, (error, response, data) => {
+      try {
+        taskinfo.signapp = JSON.parse(data.match(/\((.*)\);/)[1])
+        resolve()
+      } catch (e) {
+        chavy.msg(cookieName, `V力值活动完成结果: 失败`, `说明: ${e}`)
+        chavy.log(`❌ ${cookieName} signapp - V力值活动完成失败: ${e}`)
+        chavy.log(`❌ ${cookieName} signapp - response: ${JSON.stringify(response)}`)
+        resolve()
+      }
+    })
+  })
+}
+
+//增片
+function signtaskGift() {
+  return new Promise((resolve, reject) => {
+    const timestamp = Math.round(new Date().getTime() / 1000).toString()
+    const VAL_signurl = `https://vip.video.qq.com/fcgi-bin/comm_cgi?name=spp_MissionFaHuo&cmd=4&task_id=6&_=${timestamp}`
     let url = { url: VAL_signurl, headers: {} }
     url.headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_2) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.4 Safari/605.1.15'
     chavy.get(url, (error, response, data) => {
