@@ -1,37 +1,37 @@
 const cookieName = '腾讯视频'
-const cookieKey = 'chavy_cookie_videoqq'
-const authUrlKey = 'chavy_auth_url_videoqq'
-const authHeaderKey = 'chavy_auth_header_videoqq'
-const msignurlKey = 'chavy_msign_url_videoqq'
-const msignheaderKey = 'chavy_msign_header_videoqq'
-const chavy = init()
+const cookieKey = 'loyio_cookie_videoqq'
+const authUrlKey = 'loyio_auth_url_videoqq'
+const authHeaderKey = 'loyio_auth_header_videoqq'
+const msignurlKey = 'loyio_msign_url_videoqq'
+const msignheaderKey = 'loyio_msign_header_videoqq'
+const loyio = init()
 
 const cookieVal = $request.headers['Cookie']
 if (cookieVal) {
   if ($request.url.indexOf('auth_refresh') > 0) {
     const authurl = $request.url
     const authHeader = JSON.stringify($request.headers)
-    if (cookieVal) chavy.setdata(cookieVal, cookieKey)
-    if (authurl) chavy.setdata(authurl, authUrlKey)
-    if (authHeader) chavy.setdata(authHeader, authHeaderKey)
-    chavy.msg(`${cookieName}`, '获取Cookie: 成功', '')
-    chavy.log(`[${cookieName}] 获取Cookie: 成功, Cookie: ${cookieVal}`)
-    chavy.log(`[${cookieName}] 获取Cookie: 成功, AuthUrl: ${authurl}`)
-    chavy.log(`[${cookieName}] 获取Cookie: 成功, AuthHeader: ${authHeader}`)
+    if (cookieVal) loyio.setdata(cookieVal, cookieKey)
+    if (authurl) loyio.setdata(authurl, authUrlKey)
+    if (authHeader) loyio.setdata(authHeader, authHeaderKey)
+    loyio.msg(`${cookieName}`, '获取Cookie: 成功', '')
+    loyio.log(`[${cookieName}] 获取Cookie: 成功, Cookie: ${cookieVal}`)
+    loyio.log(`[${cookieName}] 获取Cookie: 成功, AuthUrl: ${authurl}`)
+    loyio.log(`[${cookieName}] 获取Cookie: 成功, AuthHeader: ${authHeader}`)
   } else if ($request.url.indexOf('mobile_checkin') > 0) {
     const msignurl = $request.url
     const msignheader = JSON.stringify($request.headers)
-    if (msignurl) chavy.setdata(msignurl, msignurlKey)
-    if (msignheader) chavy.setdata(msignheader, msignheaderKey)
-    chavy.msg(`${cookieName}`, '获取Cookie: 成功', '')
-    chavy.log(`[${cookieName}] 获取Cookie: 成功, msignurl: ${msignurl}`)
-    chavy.log(`[${cookieName}] 获取Cookie: 成功, msignheader: ${msignheader}`)
+    if (msignurl) loyio.setdata(msignurl, msignurlKey)
+    if (msignheader) loyio.setdata(msignheader, msignheaderKey)
+    loyio.msg(`${cookieName}`, '获取Cookie: 成功', '')
+    loyio.log(`[${cookieName}] 获取Cookie: 成功, msignurl: ${msignurl}`)
+    loyio.log(`[${cookieName}] 获取Cookie: 成功, msignheader: ${msignheader}`)
   } else {
-    chavy.setdata(cookieVal, cookieKey)
-    chavy.setdata(``, authUrlKey)
-    chavy.setdata(``, authHeaderKey)
-    chavy.msg(`${cookieName}`, '获取Cookie: 成功', '')
-    chavy.log(`[${cookieName}] 获取Cookie: 成功, Cookie: ${cookieVal}`)
+    loyio.setdata(cookieVal, cookieKey)
+    loyio.setdata(``, authUrlKey)
+    loyio.setdata(``, authHeaderKey)
+    loyio.msg(`${cookieName}`, '获取Cookie: 成功', '')
+    loyio.log(`[${cookieName}] 获取Cookie: 成功, Cookie: ${cookieVal}`)
   }
 }
 
@@ -78,4 +78,4 @@ function init() {
   }
   return { isSurge, isQuanX, msg, log, getdata, setdata, get, post, done }
 }
-chavy.done()
+loyio.done()

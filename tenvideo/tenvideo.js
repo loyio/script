@@ -1,21 +1,21 @@
-const chavy = init()
+const loyio = init()
 const cookieName = '腾讯视频'
-const KEY_signcookie = 'chavy_cookie_videoqq'
-const KEY_loginurl = 'chavy_auth_url_videoqq'
-const KEY_loginheader = 'chavy_auth_header_videoqq'
-const KEY_mh5signurl = 'chavy_msign_url_videoqq'
-const KEY_mh5signheader = 'chavy_msign_header_videoqq'
+const KEY_signcookie = 'loyio_cookie_videoqq'
+const KEY_loginurl = 'loyio_auth_url_videoqq'
+const KEY_loginheader = 'loyio_auth_header_videoqq'
+const KEY_mh5signurl = 'loyio_msign_url_videoqq'
+const KEY_mh5signheader = 'loyio_msign_header_videoqq'
 
 const signinfo = {}
 const taskinfo = {}
-let VAL_signcookie = chavy.getdata(KEY_signcookie)
-let VAL_loginurl = chavy.getdata(KEY_loginurl)
-let VAL_loginheader = chavy.getdata(KEY_loginheader)
-let VAL_mh5signurl = chavy.getdata(KEY_mh5signurl)
-let VAL_mh5signheader = chavy.getdata(KEY_mh5signheader)
+let VAL_signcookie = loyio.getdata(KEY_signcookie)
+let VAL_loginurl = loyio.getdata(KEY_loginurl)
+let VAL_loginheader = loyio.getdata(KEY_loginheader)
+let VAL_mh5signurl = loyio.getdata(KEY_mh5signurl)
+let VAL_mh5signheader = loyio.getdata(KEY_mh5signheader)
 
 ;(sign = async () => {
-  chavy.log(`🔔 ${cookieName}`)
+  loyio.log(`🔔 ${cookieName}`)
   await login()
   await signapp()
   await signtaskdownload()
@@ -24,19 +24,19 @@ let VAL_mh5signheader = chavy.getdata(KEY_mh5signheader)
   await signtaskWatch()
   await getexp()
   showmsg()
-  chavy.done()
-})().catch((e) => chavy.log(`❌ ${cookieName} 签到失败: ${e}`), chavy.done())
+  loyio.done()
+})().catch((e) => loyio.log(`❌ ${cookieName} 签到失败: ${e}`), loyio.done())
 
 function login() {
   return new Promise((resolve, reject) => {
     const url = { url: VAL_loginurl, headers: JSON.parse(VAL_loginheader) }
-    chavy.get(url, (error, response, data) => {
+    loyio.get(url, (error, response, data) => {
       try {
         resolve()
       } catch (e) {
-        chavy.msg(cookieName, `签到结果: 失败`, `说明: ${e}`)
-        chavy.log(`❌ ${cookieName} login - 登录失败: ${e}`)
-        chavy.log(`❌ ${cookieName} login - response: ${JSON.stringify(response)}`)
+        loyio.msg(cookieName, `签到结果: 失败`, `说明: ${e}`)
+        loyio.log(`❌ ${cookieName} login - 登录失败: ${e}`)
+        loyio.log(`❌ ${cookieName} login - response: ${JSON.stringify(response)}`)
         resolve()
       }
     })
@@ -49,14 +49,14 @@ function signapp() {
     const VAL_signurl = `https://vip.video.qq.com/fcgi-bin/comm_cgi?name=hierarchical_task_system&cmd=2&_=${timestamp}`
     let url = { url: VAL_signurl, headers: {} }
     url.headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_2) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.4 Safari/605.1.15'
-    chavy.get(url, (error, response, data) => {
+    loyio.get(url, (error, response, data) => {
       try {
         signinfo.signapp = JSON.parse(data.match(/\((.*)\);/)[1])
         resolve()
       } catch (e) {
-        chavy.msg(cookieName, `签到结果: 失败`, `说明: ${e}`)
-        chavy.log(`❌ ${cookieName} signapp - 签到失败: ${e}`)
-        chavy.log(`❌ ${cookieName} signapp - response: ${JSON.stringify(response)}`)
+        loyio.msg(cookieName, `签到结果: 失败`, `说明: ${e}`)
+        loyio.log(`❌ ${cookieName} signapp - 签到失败: ${e}`)
+        loyio.log(`❌ ${cookieName} signapp - response: ${JSON.stringify(response)}`)
         resolve()
       }
     })
@@ -70,14 +70,14 @@ function signtaskdownload() {
     const VAL_signurl = `https://vip.video.qq.com/fcgi-bin/comm_cgi?name=spp_MissionFaHuo&cmd=4&task_id=7&_=${timestamp}`
     let url = { url: VAL_signurl, headers: {} }
     url.headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_2) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.4 Safari/605.1.15'
-    chavy.get(url, (error, response, data) => {
+    loyio.get(url, (error, response, data) => {
       try {
         taskinfo.signapp = JSON.parse(data.match(/\((.*)\);/)[1])
         resolve()
       } catch (e) {
-        chavy.msg(cookieName, `V力值活动完成结果: 失败`, `说明: ${e}`)
-        chavy.log(`❌ ${cookieName} signapp - V力值活动完成失败: ${e}`)
-        chavy.log(`❌ ${cookieName} signapp - response: ${JSON.stringify(response)}`)
+        loyio.msg(cookieName, `V力值活动完成结果: 失败`, `说明: ${e}`)
+        loyio.log(`❌ ${cookieName} signapp - V力值活动完成失败: ${e}`)
+        loyio.log(`❌ ${cookieName} signapp - response: ${JSON.stringify(response)}`)
         resolve()
       }
     })
@@ -91,14 +91,14 @@ function signtaskBarrage() {
     const VAL_signurl = `https://vip.video.qq.com/fcgi-bin/comm_cgi?name=spp_MissionFaHuo&cmd=4&task_id=3&_=${timestamp}`
     let url = { url: VAL_signurl, headers: {} }
     url.headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_2) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.4 Safari/605.1.15'
-    chavy.get(url, (error, response, data) => {
+    loyio.get(url, (error, response, data) => {
       try {
         taskinfo.signapp = JSON.parse(data.match(/\((.*)\);/)[1])
         resolve()
       } catch (e) {
-        chavy.msg(cookieName, `V力值活动完成结果: 失败`, `说明: ${e}`)
-        chavy.log(`❌ ${cookieName} signapp - V力值活动完成失败: ${e}`)
-        chavy.log(`❌ ${cookieName} signapp - response: ${JSON.stringify(response)}`)
+        loyio.msg(cookieName, `V力值活动完成结果: 失败`, `说明: ${e}`)
+        loyio.log(`❌ ${cookieName} signapp - V力值活动完成失败: ${e}`)
+        loyio.log(`❌ ${cookieName} signapp - response: ${JSON.stringify(response)}`)
         resolve()
       }
     })
@@ -112,14 +112,14 @@ function signtaskGift() {
     const VAL_signurl = `https://vip.video.qq.com/fcgi-bin/comm_cgi?name=spp_MissionFaHuo&cmd=4&task_id=6&_=${timestamp}`
     let url = { url: VAL_signurl, headers: {} }
     url.headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_2) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.4 Safari/605.1.15'
-    chavy.get(url, (error, response, data) => {
+    loyio.get(url, (error, response, data) => {
       try {
         taskinfo.signapp = JSON.parse(data.match(/\((.*)\);/)[1])
         resolve()
       } catch (e) {
-        chavy.msg(cookieName, `V力值活动完成结果: 失败`, `说明: ${e}`)
-        chavy.log(`❌ ${cookieName} signapp - V力值活动完成失败: ${e}`)
-        chavy.log(`❌ ${cookieName} signapp - response: ${JSON.stringify(response)}`)
+        loyio.msg(cookieName, `V力值活动完成结果: 失败`, `说明: ${e}`)
+        loyio.log(`❌ ${cookieName} signapp - V力值活动完成失败: ${e}`)
+        loyio.log(`❌ ${cookieName} signapp - response: ${JSON.stringify(response)}`)
         resolve()
       }
     })
@@ -133,14 +133,14 @@ function signtaskWatch() {
     const VAL_signurl = `https://vip.video.qq.com/fcgi-bin/comm_cgi?name=spp_MissionFaHuo&cmd=4&task_id=1&_=${timestamp}`
     let url = { url: VAL_signurl, headers: {} }
     url.headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_2) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.4 Safari/605.1.15'
-    chavy.get(url, (error, response, data) => {
+    loyio.get(url, (error, response, data) => {
       try {
         taskinfo.signapp = JSON.parse(data.match(/\((.*)\);/)[1])
         resolve()
       } catch (e) {
-        chavy.msg(cookieName, `V力值活动完成结果: 失败`, `说明: ${e}`)
-        chavy.log(`❌ ${cookieName} signapp - V力值活动完成失败: ${e}`)
-        chavy.log(`❌ ${cookieName} signapp - response: ${JSON.stringify(response)}`)
+        loyio.msg(cookieName, `V力值活动完成结果: 失败`, `说明: ${e}`)
+        loyio.log(`❌ ${cookieName} signapp - V力值活动完成失败: ${e}`)
+        loyio.log(`❌ ${cookieName} signapp - response: ${JSON.stringify(response)}`)
         resolve()
       }
     })
@@ -153,14 +153,14 @@ function getexp() {
     const VAL_getexpurl = `https://vip.video.qq.com/fcgi-bin/comm_cgi?name=spp_PropertyNum&cmd=1&growth_value=1&otype=json&_=${timestamp}`
     let url = { url: VAL_getexpurl, headers: {} }
     url.headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_2) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.4 Safari/605.1.15'
-    chavy.get(url, (error, response, data) => {
+    loyio.get(url, (error, response, data) => {
       try {
         signinfo.expinfo = JSON.parse(data.match(/\((.*)\);/)[1])
         resolve()
       } catch (e) {
-        chavy.msg(cookieName, `签到结果: 失败`, `说明: ${e}`)
-        chavy.log(`❌ ${cookieName} getexp - 签到失败: ${e}`)
-        chavy.log(`❌ ${cookieName} getexp - response: ${JSON.stringify(response)}`)
+        loyio.msg(cookieName, `签到结果: 失败`, `说明: ${e}`)
+        loyio.log(`❌ ${cookieName} getexp - 签到失败: ${e}`)
+        loyio.log(`❌ ${cookieName} getexp - response: ${JSON.stringify(response)}`)
         resolve()
       }
     })
@@ -186,7 +186,7 @@ function showmsg() {
       subTitle = '签到结果: 未知'
       detail = `编码: ${signinfo.signapp.ret}, 说明: ${signinfo.signapp.msg}`
     }
-    chavy.msg(cookieName, subTitle, detail)
+    loyio.msg(cookieName, subTitle, detail)
   }
 }
 
