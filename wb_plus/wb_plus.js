@@ -196,9 +196,11 @@ function filter_top_search(group) {
             if (group_item.hasOwnProperty("promotion")) {
                 group.splice(k, 1);
             }else{
-              for (let bli = 0; bli < block_list.length; bli++) {
-                if (group_item.desc.indexOf(block_list[bli]) != -1){
-                  group.splice(k, 1);
+              if(group_item.hasOwnProperty("desc")){
+                for (let bli = 0; bli < block_list.length; bli++) {
+                  if (group_item.desc.indexOf(block_list[bli]) != -1){
+                    group.splice(k, 1);
+                  }
                 }
               }
             }
