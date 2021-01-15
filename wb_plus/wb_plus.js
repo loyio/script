@@ -28,12 +28,16 @@ const path22 = "/live/media_homelist";
 const loyio = init()
 
 const block_str = loyio.getdata("WeiboPlus.wp_keyword")
+console.log("block_str: "+block_str)
 
 if(isEmpty(block_str)){
     const block_list = []
 }else{
     const block_list = block_str.split(",")
 }
+
+console.log("block_list:",block_list)
+
 
 function isEmpty(obj){
     if(typeof obj == "undefined" || obj == null || obj == ""){
