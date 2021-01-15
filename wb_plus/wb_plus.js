@@ -38,7 +38,6 @@ if(!isEmpty(weiboplus_str)){
 }else{
     var block_str = null
 }
-console.log("block_str: "+block_str)
 
 if(isEmpty(block_str)){
     var block_list = [];
@@ -46,11 +45,6 @@ if(isEmpty(block_str)){
     var block_list = block_str.split(",");
 }
 
-loyio.msg("Weibo-plus", "block_str", block_str)
-
-console.log("block_list:",block_list)
-
-loyio.msg("Weibo-plus", "block_list", str(block_list))
 
 
 function isEmpty(obj){
