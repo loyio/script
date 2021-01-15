@@ -25,7 +25,10 @@ const path20 = "/video/tiny_stream_video_list";
 const path21 = "/photo/info";
 const path22 = "/live/media_homelist";
 
-const block_str = "肖战,迪丽热巴,王一博,郑爽"
+const loyio = init()
+
+const block_str = loyio.getdata("WeiboPlus.wp_keyword")
+
 const block_list = block_str.split(",")
 
 const url = $request.url;
@@ -202,6 +205,12 @@ function filter_top_search(group) {
                     group.splice(k, 1);
                   }
                 }
+              } else if(group_item.hasOwnProperty("title_sub")){
+                for (let bli = 0; bli < block_list.length; bli++) {
+                    if (group_item.title_sub.indexOf(block_list[bli]) != -1){
+                      group.splice(k, 1);
+                    }
+                  }
               }
             }
         }
@@ -223,3 +232,47 @@ function is_timeline_likerecommend(title) {
 function is_stream_video_ad(item) {
     return item.ad_state && item.ad_state == 1;
 }
+
+function init() {
+    isSurge = () => {
+      return undefined === this.$httpClient ? false : true
+    }
+    isQuanX = () => {
+      return undefined === this.$task ? false : true
+    }
+    getdata = (key) => {
+      if (isSurge()) return $persistentStore.read(key)
+      if (isQuanX()) return $prefs.valueForKey(key)
+    }
+    setdata = (key, val) => {
+      if (isSurge()) return $persistentStore.write(key, val)
+      if (isQuanX()) return $prefs.setValueForKey(key, val)
+    }
+    msg = (title, subtitle, body) => {
+      if (isSurge()) $notification.post(title, subtitle, body)
+      if (isQuanX()) $notify(title, subtitle, body)
+    }
+    log = (message) => console.log(message)
+    get = (url, cb) => {
+      if (isSurge()) {
+        $httpClient.get(url, cb)
+      }
+      if (isQuanX()) {
+        url.method = 'GET'
+        $task.fetch(url).then((resp) => cb(null, resp, resp.body))
+      }
+    }
+    post = (url, cb) => {
+      if (isSurge()) {
+        $httpClient.post(url, cb)
+      }
+      if (isQuanX()) {
+        url.method = 'POST'
+        $task.fetch(url).then((resp) => cb(null, resp, resp.body))
+      }
+    }
+    done = (value = {}) => {
+      $done(value)
+    }
+    return { isSurge, isQuanX, msg, log, getdata, setdata, get, post, done }
+  }

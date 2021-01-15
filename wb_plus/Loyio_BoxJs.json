@@ -1,0 +1,36 @@
+{
+  "id": "loyio.app.sub",
+  "name": "Loyio 脚本订阅",
+  "author": "@loyio",
+  "icon": "https://avatars2.githubusercontent.com/u/32695256",
+  "repo": "https://github.com/loyio/JsScript",
+  "apps": [
+      {
+        "id": "Loyio.WeiboPlus",
+        "name": "weibo-plus",
+        "descs_html": [
+            "输入你想要屏蔽的关键词，相关含有关键词的热搜也将会被屏蔽"
+        ],
+        "keys": ["@WeiboPlus.wp_keyword"],
+        "settings": [
+            {
+            "id": "@WeiboPlus.wp_keyword",
+            "name": "屏蔽关键词",
+            "val": "",
+            "type": "textarea",
+            "placeholder": "肖战,\n郑爽", 
+            "autoGrow": true, 
+            "rows": 2,
+            "desc": "填入需要屏蔽的热搜关键词，中间用,隔开"
+            }
+        ],
+        "author": "@loyio",
+        "repo": "https://github.com/loyio/JsScript/tree/master/wb_plus",
+        "script": "https://raw.githubusercontent.com/loyio/JsScript/master/wb_plus/wb_plus.js",
+        "icons": [
+            "https://raw.githubusercontent.com/Orz-3/mini/master/weibo.png",
+            "https://raw.githubusercontent.com/Orz-3/task/master/weibo.png"
+        ]
+    }
+  ]
+}
