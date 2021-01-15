@@ -29,7 +29,20 @@ const loyio = init()
 
 const block_str = loyio.getdata("WeiboPlus.wp_keyword")
 
-const block_list = block_str.split(",")
+if(isEmpty(block_str)){
+    const block_list = []
+}else{
+    const block_list = block_str.split(",")
+}
+
+function isEmpty(obj){
+    if(typeof obj == "undefined" || obj == null || obj == ""){
+        return true;
+    }else{
+        return false;
+    }
+}
+
 
 const url = $request.url;
 let body = $response.body;
