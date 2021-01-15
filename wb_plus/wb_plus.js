@@ -27,13 +27,23 @@ const path22 = "/live/media_homelist";
 
 const loyio = init()
 
-const block_str = loyio.getdata("WeiboPlus.wp_keyword")
+const weiboplus_str = loyio.getdata("WeiboPlus")
+if(!isEmpty(weiboplus_str)){
+    weiboplus_list = JSON.parse(weiboplus_str)
+    if(weiboplus_str.hasOwnProperty("wp_keyword")){
+        var block_str = weiboplus_list["wp_keyword"]
+    }else{
+        var block_str = null
+    }
+}else{
+    var block_str = null
+}
 console.log("block_str: "+block_str)
 
 if(isEmpty(block_str)){
-    const block_list = []
+    var block_list = [];
 }else{
-    const block_list = block_str.split(",")
+    var block_list = block_str.split(",");
 }
 
 loyio.msg("Weibo-plus", "block_str", block_str)
