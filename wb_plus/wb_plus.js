@@ -30,7 +30,7 @@ const loyio = init()
 const weiboplus_str = loyio.getdata("WeiboPlus")
 if(!isEmpty(weiboplus_str)){
     weiboplus_list = JSON.parse(weiboplus_str)
-    if(weiboplus_str.hasOwnProperty("wp_keyword")){
+    if(weiboplus_list.hasOwnProperty("wp_keyword")){
         var block_str = weiboplus_list["wp_keyword"]
     }else{
         var block_str = null
