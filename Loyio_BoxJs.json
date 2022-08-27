@@ -25,8 +25,8 @@
             }
         ],
         "author": "@loyio",
-        "repo": "https://github.com/loyio/JsScript/tree/master/wb_plus",
-        "script": "https://raw.githubusercontent.com/loyio/JsScript/master/wb_plus/wb_plus.js",
+        "repo": "https://github.com/loyio/script/tree/master/wb_plus",
+        "script": "https://raw.githubusercontent.com/loyio/script/master/wb_plus/wb_plus.js",
         "icons": [
             "https://raw.githubusercontent.com/Orz-3/mini/master/weibo.png",
             "https://raw.githubusercontent.com/Orz-3/task/master/weibo.png"
