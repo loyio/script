@@ -5,3 +5,8 @@
 
 # Script
 自己修改的一些脚本
+
+# BoxJs订阅
+```
+https://raw.githubusercontent.com/loyio/script/master/Loyio_BoxJs.json
+```
